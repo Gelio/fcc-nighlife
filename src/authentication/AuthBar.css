@@ -1,0 +1,9 @@
+.auth-bar {
+  border: solid #FFD6D6 1px;
+  border-left: none;
+  border-right: none;
+
+  background-color: #390050;
+
+  padding: 2rem 0;
+}

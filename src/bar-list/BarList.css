@@ -1,0 +1,9 @@
+.bar-list-wrapper {
+  padding-top: 2rem;
+}
+
+.bar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}

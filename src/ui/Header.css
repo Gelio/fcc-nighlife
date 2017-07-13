@@ -1,0 +1,17 @@
+.header {
+  text-align: center;
+  padding: 2rem 0 2rem 0;
+
+  background: linear-gradient(120deg, #18587A, #FC624D);
+}
+
+@media (min-width: 640px) {
+  .header {
+    padding: 5rem 0 2rem 0;
+  }
+}
+
+.header-title {
+  margin: 0;
+  color: #FFD6D6;
+}
