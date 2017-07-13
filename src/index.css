@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -8,11 +9,13 @@ html, body {
 
 body {
   font-family: 'Zilla Slab', serif;
-  background-color: #18587A;
-  color: #FCA7A7;
+  background-color: #18587a;
+  color: #fca7a7;
 }
 
-*, *:after, *:before {
+*,
+*:after,
+*:before {
   box-sizing: inherit;
 }
 

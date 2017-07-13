@@ -2,7 +2,7 @@
   text-align: center;
   padding: 2rem 0 2rem 0;
 
-  background: linear-gradient(120deg, #18587A, #FC624D);
+  background: linear-gradient(120deg, #18587a, #fc624d);
 }
 
 @media (min-width: 640px) {
@@ -13,5 +13,5 @@
 
 .header-title {
   margin: 0;
-  color: #FFD6D6;
+  color: #ffd6d6;
 }
