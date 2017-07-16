@@ -7,9 +7,6 @@ import Footer from './ui/Footer';
 // Authentication
 import AuthBar from './authentication/AuthBar';
 
-// Search Box
-import SearchBox from './search-box/SearchBox';
-
 // Bar list
 import BarList from './bar-list/BarList';
 
@@ -18,7 +15,6 @@ function App() {
     <div className="app">
       <Header />
       <AuthBar />
-      <SearchBox />
       <BarList />
       <Footer />
     </div>

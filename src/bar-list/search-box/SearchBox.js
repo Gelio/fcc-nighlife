@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import './SearchBox.css';
 
@@ -36,6 +37,7 @@ class SearchBox extends Component {
 
   beginSearch() {
     this.lowerButton();
+    this.props.search(this.state.location);
   }
 
   render() {
@@ -67,5 +69,9 @@ class SearchBox extends Component {
     );
   }
 }
+
+SearchBox.propTypes = {
+  search: PropTypes.func.isRequired,
+};
 
 export default SearchBox;
