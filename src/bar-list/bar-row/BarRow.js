@@ -11,14 +11,20 @@ import './BarRow.css';
 function BarRow(props) {
   const bar = props.bar;
   return (
-    <div className="bar">
+    <li className="bar">
       <h3>
-        {bar.name}
+        <a
+          href={`https://www.google.com/maps/search/?api=1&query=${bar.location
+            .lat},${bar.location.lng}&query_place_id=${bar.id}`}
+          target="_blank"
+        >
+          {bar.name}
+        </a>
       </h3>
       <p>
         {bar.description}
       </p>
-    </div>
+    </li>
   );
 }
 

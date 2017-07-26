@@ -35,7 +35,8 @@ class SearchBox extends Component {
     });
   }
 
-  beginSearch() {
+  beginSearch(event) {
+    event.preventDefault();
     this.lowerButton();
     this.props.search(this.state.location);
   }
@@ -44,30 +45,34 @@ class SearchBox extends Component {
     const { location, buttonLifted } = this.state;
     const disabled = this.props.disabled;
 
-    const buttonClassName = `search-box__button ${(buttonLifted && !disabled) ? 'lifted' : ''}`;
+    const buttonClassName = `search-box__button ${buttonLifted && !disabled
+      ? 'lifted'
+      : ''}`;
 
     return (
       <div className="container">
-        <div className="search-box__wrapper">
-          <input
-            type="text"
-            className="search-box__field"
-            placeholder="Enter your location"
-            onChange={this.onLocationChange}
-            value={location}
-          />
+        <form noValidate>
+          <div className="search-box__wrapper">
+            <input
+              type="text"
+              className="search-box__field"
+              placeholder="Enter your location"
+              onChange={this.onLocationChange}
+              value={location}
+            />
 
-          <button
-            type="submit"
-            className={buttonClassName}
-            onMouseEnter={this.liftButton}
-            onMouseLeave={this.lowerButton}
-            onClick={this.beginSearch}
-            disabled={disabled}
-          >
-            Search
-          </button>
-        </div>
+            <button
+              type="submit"
+              className={buttonClassName}
+              onMouseEnter={this.liftButton}
+              onMouseLeave={this.lowerButton}
+              onClick={this.beginSearch}
+              disabled={disabled}
+            >
+              Search
+            </button>
+          </div>
+        </form>
       </div>
     );
   }

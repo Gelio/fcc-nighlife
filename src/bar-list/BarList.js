@@ -37,14 +37,20 @@ class BarList extends Component {
     } catch (error) {
       return this.setState({ isFetching: false, error });
     }
-
     this.setState({
       isFetching: false,
       bars: nearbyPlaces.map(
         place =>
-          new Bar(place.id, `${place.name} (${place.rating})`, place.vicinity),
+          new Bar(
+            place.place_id,
+            `${place.name} (${place.rating})`,
+            place.vicinity,
+            place.geometry.location.toJSON(),
+          ),
       ),
     });
+
+    return true;
   }
 
   render() {
@@ -56,11 +62,7 @@ class BarList extends Component {
     if (!isFetching && bars.length > 0) {
       content = (
         <ul className="bar-list">
-          {' '}{bars.map(bar =>
-            <li key={bar.id}>
-              <BarRow bar={bar} />{' '}
-            </li>,
-          )}{' '}
+          {bars.map(bar => <BarRow key={bar.id} bar={bar} />)}
         </ul>
       );
     }

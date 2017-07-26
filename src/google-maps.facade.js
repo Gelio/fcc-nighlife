@@ -8,7 +8,9 @@ class GoogleMapsFacade {
     const geocoder = new google.maps.Geocoder();
     geocoders.set(this, geocoder);
 
-    const placesService = new google.maps.places.PlacesService(document.createElement('div'));
+    const placesService = new google.maps.places.PlacesService(
+      document.createElement('div'),
+    );
     services.set(this, placesService);
   }
 
