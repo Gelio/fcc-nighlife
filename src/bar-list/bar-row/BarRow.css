@@ -6,3 +6,7 @@
 .bar:last-of-type {
   border-bottom: none;
 }
+
+.bar-link, .bar-link:visited, .bar-link:focus {
+  color: inherit;
+}

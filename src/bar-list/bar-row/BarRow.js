@@ -17,6 +17,7 @@ function BarRow(props) {
           href={`https://www.google.com/maps/search/?api=1&query=${bar.location
             .lat},${bar.location.lng}&query_place_id=${bar.id}`}
           target="_blank"
+          className="bar-link"
         >
           {bar.name}
         </a>
