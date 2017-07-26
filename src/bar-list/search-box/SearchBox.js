@@ -42,8 +42,9 @@ class SearchBox extends Component {
 
   render() {
     const { location, buttonLifted } = this.state;
+    const disabled = this.props.disabled;
 
-    const buttonClassName = `search-box__button ${buttonLifted ? 'lifted' : ''}`;
+    const buttonClassName = `search-box__button ${(buttonLifted && !disabled) ? 'lifted' : ''}`;
 
     return (
       <div className="container">
@@ -57,10 +58,12 @@ class SearchBox extends Component {
           />
 
           <button
+            type="submit"
             className={buttonClassName}
             onMouseEnter={this.liftButton}
             onMouseLeave={this.lowerButton}
             onClick={this.beginSearch}
+            disabled={disabled}
           >
             Search
           </button>
@@ -72,6 +75,7 @@ class SearchBox extends Component {
 
 SearchBox.propTypes = {
   search: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 export default SearchBox;
