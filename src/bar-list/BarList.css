@@ -7,3 +7,8 @@
   padding: 0;
   margin: 0;
 }
+
+.geolocation-button-wrapper {
+  margin-top: 10px;
+  text-align: center;
+}

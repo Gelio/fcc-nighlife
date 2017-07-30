@@ -11,30 +11,35 @@ import AuthService from '../authentication/auth.service';
 import './BarList.css';
 
 class BarList extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       bars: [],
       isFetching: false,
       error: null,
       attendedBars: {},
+      isGeolocationEnabled: 'geolocation' in navigator,
     };
+
+    this.authUnsub = AuthService.getAuth().onAuthStateChanged(() => {
+      this.updateAttendance();
+      this.forceUpdate();
+    });
 
     this.beginSearch = this.beginSearch.bind(this);
     this.toggleAttendance = this.toggleAttendance.bind(this);
+    this.searchUsingGeolocation = this.searchUsingGeolocation.bind(this);
   }
 
-  async beginSearch(address) {
-    this.setState({ isFetching: true, error: null, bars: [] });
+  componentWillUnmount() {
+    this.authUnsub();
+  }
 
-    let location;
-    try {
-      location = await GoogleMaps.getGeocode(address);
-    } catch (error) {
-      return this.setState({ isFetching: false, error });
-    }
-
+  /**
+   * @param {{ lat: number, lng: number }} location
+   */
+  async searchAtLocation(location) {
     let nearbyPlaces;
     try {
       nearbyPlaces = await GoogleMaps.getPlaces(location, 'bar');
@@ -51,6 +56,17 @@ class BarList extends Component {
           place.rating,
         ),
     );
+    this.updateAttendance(bars);
+
+    this.setState({
+      isFetching: false,
+      bars,
+    });
+
+    return true;
+  }
+
+  async updateAttendance(bars = this.state.bars) {
     const attendedBars = {};
     if (AuthService.isAuthenticated()) {
       const userId = AuthService.getUser().uid;
@@ -65,12 +81,33 @@ class BarList extends Component {
     }
 
     this.setState({
-      isFetching: false,
-      bars,
       attendedBars,
     });
+  }
 
-    return true;
+  /**
+   * @param {string} address
+   */
+  async beginSearch(address) {
+    this.setState({ isFetching: true, error: null, bars: [] });
+
+    let location;
+    try {
+      location = await GoogleMaps.getGeocode(address);
+    } catch (error) {
+      return this.setState({ isFetching: false, error });
+    }
+
+    return this.searchAtLocation(location);
+  }
+
+  searchUsingGeolocation() {
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.searchAtLocation({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
+    });
   }
 
   /**
@@ -87,7 +124,7 @@ class BarList extends Component {
   }
 
   render() {
-    const { bars, error, isFetching, attendedBars } = this.state;
+    const { bars, error, isFetching, attendedBars, isGeolocationEnabled } = this.state;
     let content = <span> Please enter your location above and press Search. </span>;
 
     if (!isFetching && bars.length > 0) {
@@ -115,11 +152,17 @@ class BarList extends Component {
 
     return (
       <div>
-        <SearchBox search={this.beginSearch} disabled={isFetching} />{' '}
+        <SearchBox search={this.beginSearch} disabled={isFetching} />
+        {isGeolocationEnabled &&
+          <div className="geolocation-button-wrapper">
+            <button className="geolocation-button" onClick={this.searchUsingGeolocation}>
+              Use current location
+            </button>
+          </div>}
         <div className="bar-list-wrapper container">
-          <h2> Bars near you </h2>
-          {content}{' '}
-        </div>{' '}
+          <h2>Bars near you</h2>
+          {content}
+        </div>
       </div>
     );
   }
