@@ -50,6 +50,9 @@ class AuthBar extends Component {
         });
       }
     });
+
+    this.signIn = this.signIn.bind(this);
+    this.signOut = this.signOut.bind(this);
   }
 
   signIn() {
