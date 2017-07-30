@@ -1,5 +1,5 @@
 {
-  "name": "fcc-nightlife",
+  "name": "fcc-nighlife",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,7 +13,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "@types/googlemaps": "^3.26.17",
@@ -23,6 +25,8 @@
     "eslint-plugin-jest": "20.0.3",
     "eslint-plugin-jsx-a11y": "5.1.1",
     "eslint-plugin-react": "7.1.0",
+    "gh-pages": "^1.0.0",
     "jest": "^20.0.4"
-  }
+  },
+  "homepage": "https://gelio.github.io/fcc-nighlife"
 }
