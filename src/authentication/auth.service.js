@@ -25,6 +25,14 @@ class AuthService {
   static getAuth() {
     return firebase.auth();
   }
+
+  static getUser() {
+    return AuthService.getAuth().currentUser;
+  }
+
+  static isAuthenticated() {
+    return !!AuthService.getUser();
+  }
 }
 
 export default AuthService;

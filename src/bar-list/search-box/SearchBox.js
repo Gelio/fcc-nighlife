@@ -45,9 +45,7 @@ class SearchBox extends Component {
     const { location, buttonLifted } = this.state;
     const disabled = this.props.disabled;
 
-    const buttonClassName = `search-box__button ${buttonLifted && !disabled
-      ? 'lifted'
-      : ''}`;
+    const buttonClassName = `search-box__button ${buttonLifted && !disabled ? 'lifted' : ''}`;
 
     return (
       <div className="container">
